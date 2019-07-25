@@ -1,11 +1,15 @@
 package app;
 
+import java.util.Iterator;
+
 import datastruct.LinkedListImpl;
 
 // create : shift , push, insert
 // read : get
 // update : set
 // delete : poll, pop, remove
+
+// iterator
 public class App 
 {
     public static void main( String[] args )
@@ -15,7 +19,7 @@ public class App
             "공정환","김대현",
             "김기범","장재호"
         };
-
+        
         // create
         for (String elem : names) {
             list.add(elem);
@@ -46,7 +50,7 @@ public class App
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
         }        
-
+        
         // update set
         list.set(0, "강사님");
         System.out.println("\n\nset : 이승철 -> 강사님\n\n");
@@ -75,5 +79,17 @@ public class App
             System.out.println(list.get(i));
         }
 
+        System.out.println("\n\niter 구현\n\n");
+        Iterator<String> iter = list.iterator();
+        while (iter.hasNext()) {
+            String name = iter.next();
+            System.out.println(name);
+        }
+
+        
+        System.out.println("\n\nforeach문 구동\n\n");
+        for (String item : list) {
+            System.out.println(item);
+        }
     }
 }

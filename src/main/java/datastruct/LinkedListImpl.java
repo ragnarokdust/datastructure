@@ -1,9 +1,11 @@
 package datastruct;
 
+import java.util.Iterator;
+
 /**
  * LinkedListImpl
  */
-public class LinkedListImpl<E>{
+public class LinkedListImpl<E> implements Iterable<E>{
     private int size = 0;
     private Node<E> first;
     private Node<E> last;
@@ -13,7 +15,7 @@ public class LinkedListImpl<E>{
     }
 
     // create
-    public void add(E elem){
+    public void add(E elem){ 
         Node<E> last = this.last;
         Node<E> newNode = new Node<>(last, elem, null);
         this.last = newNode;
@@ -134,6 +136,20 @@ public class LinkedListImpl<E>{
         return elem;
     }
 
+    // Node<E> accessNode(int index) {
+    //     if (index < (size / 2)) {
+    //         Node<E> elem = first;
+    //         for (int i = 0; i < index; i++)
+    //             elem = elem.next;
+    //         return elem;
+    //     } else {
+    //         Node<E> elem = last;
+    //         for (int i = size - 1; i > index; i--)
+    //             elem = elem.prev;
+    //         return elem;
+    //     }
+    // }
+
     E unlink(Node<E> elem) {
         E element = elem.item;
         Node<E> next = elem.next;
@@ -174,6 +190,29 @@ public class LinkedListImpl<E>{
             this.item = elem;
             this.next = next;
         }
-        
+
     }
+
+    @Override
+    public Iterator<E> iterator() {
+		return new Iterator<E>() {
+            private Node<E> curr;
+            private Node<E> next = first;
+            private int index = 0;
+
+
+            @Override
+            public boolean hasNext() {
+                return index < size;
+            }
+
+            @Override
+            public E next() {
+                curr = next;
+                next = next.next;
+                index++;
+                return curr.item;
+            }
+        };
+	}
 }
