@@ -6,11 +6,12 @@ public class Stage {
     
     public void init() {
         astar = new Astar();
-        astar.setHeight(120);
-        astar.setWidth(120);
-        astar.setEndY(100);
-        astar.setEndX(100);
-        
+        astar.setHeight(10);
+        astar.setWidth(10);
+        astar.setStartY(0);
+        astar.setStartX(0);
+        astar.setEndY(9);
+        astar.setEndX(9);
         astar.init();
     }    
 
@@ -19,8 +20,12 @@ public class Stage {
     }
     
     public void render() {
-        
+        astar.render();
     }
     public static void main(String[] args) {
+        Stage stage = new Stage();
+        stage.init();
+        stage.proc();
+        stage.render();
     }
 }
