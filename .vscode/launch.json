@@ -2,6 +2,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - MainFrame",
+            "request": "launch",
+            "mainClass": "astar.frame.MainFrame",
+            "projectName": "datastructure"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Stage",
+            "request": "launch",
+            "mainClass": "astar.cliframe.Stage",
+            "projectName": "datastructure"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - MainFrame",
+            "request": "launch",
+            "mainClass": "astar.MainFrame",
+            "projectName": "datastructure"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Stage",
             "request": "launch",
             "mainClass": "astar.Stage",

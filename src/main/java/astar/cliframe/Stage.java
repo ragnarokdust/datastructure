@@ -1,4 +1,6 @@
-package astar;
+package astar.cliframe;
+
+import astar.Astar;
 
 public class Stage {
 
