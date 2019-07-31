@@ -1,5 +1,6 @@
 package astar;
 
+import java.util.Collections;
 import java.util.LinkedList;
 
 import astar.datastruct.Cell;
@@ -27,16 +28,21 @@ public class Astar {
     }
 
     public void proc() {
-        setVisited();
+        while (searched.size() != 0) {
+            Location node = setVisited();
+            if (node.getX() == endX && node.getY() == endY)
+                break;
+        }
         setPath();
     }
 
-    //console service
+    // console service
     public void render() {
 
-        for (int i = 0; i < width*5; i++) {
+        for (int i = 0; i < width * 5; i++) {
             System.out.print("→ ");
-        }System.out.println();
+        }
+        System.out.println();
         for (int i = 0; i < height; i++) {
             System.out.print("↓ ");
             for (int j = 0; j < width; j++) {
@@ -53,31 +59,30 @@ public class Astar {
         }
     }
 
-    public void setVisited() {
-        while (searched.size() != 0) {
-            Location node = searchNode();
-            searched.remove(node);
-            visited.add(node);
-            setSearched(node);
-            if (node.getX() == endX && node.getY() == endY)
-                break;
-        }
+    public Location setVisited() {
+        Location node = searchNode();
+        searched.remove(node);
+        visited.add(node);
+        setSearched(node);              
+        return node;
     }
-    
-    public void setPath(){
-        if(visited.size()==0){
+
+    public void setPath() {
+        if (visited.size() == 0) {
             return;
         }
         Location location = visited.removeLast();
         path.add(location);
 
-        while(location != null){
-            location=location.getPrev();
+        while (true) {
+            location = location.getPrev();
+            if(location == null)
+                break;
             path.add(location);
         }
-        // Collections.reverse(path);
+        Collections.reverse(path);
     }
-    
+
     private Location searchNode() {
         searched.sort((p1, p2) -> p1.getF() - p2.getF());
         return searched.pop();
@@ -186,21 +191,26 @@ public class Astar {
             }
         }
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 150; i++) {
             int y = (int) (Math.random() * height);
             int x = (int) (Math.random() * width);
             cell[y][x].setStatus(Cell.Status.BARRIER);
         }
-        cell[1][1].setStatus(Cell.Status.BARRIER);
 
         cell[startY][startX].setStatus(Cell.Status.START);
         cell[endY][endX].setStatus(Cell.Status.END);
 
+        searched = new LinkedList<>();
+        visited = new LinkedList<>();
+        path = new LinkedList<>();
+        
         Location start = new Location(startY, startX);
         visited.add(start);
         setSearched(start);
+        
     }
 
+    
 
     public int getHeight() {
         return height;
@@ -248,5 +258,23 @@ public class Astar {
 
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    public Cell[][] getCell() {
+        return cell;
+    }
+
+    public int[][] getMask() {
+        return mask;
+    }
+
+    public LinkedList<Location> getSearched(){
+        return searched;
+    }
+    public LinkedList<Location> getVisited(){
+        return visited;
+    }
+    public LinkedList<Location> getPath(){
+        return path;
     }
 }

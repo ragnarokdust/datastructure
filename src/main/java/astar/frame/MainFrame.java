@@ -16,7 +16,7 @@ public class MainFrame extends JFrame {
         
         this.setTitle("AStar");
         this.setResizable(false);
-        this.setSize(1024,800);
+        this.setSize(1200,900);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.add(panel);
         this.setVisible(true);
